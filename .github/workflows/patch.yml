@@ -1,4 +1,3 @@
-# https://github.com/marketplace/actions/fork-repo-upstream-sync
 name: "Apply divestOS patches"
 
 on:
@@ -15,14 +14,24 @@ jobs:
 
     steps:
         
-    - name: Checkout 
+    - name: Checkout dOS
       uses: actions/checkout@v4
       with:
+        path: dos
         repository: AXP-OS/build
-        ref: "${{ github.event.repository.name }}"
-        # REQUIRED if your upstream repo is private (see wiki)
-        persist-credentials: false
-        #token: ${{ secrets.GITHUB_TOKEN }}
+        ref: ${{ github.head_ref || github.ref_name }}
         submodules: true
+        lfs: true
 
-    
+    - name: Checkout repo
+      uses: actions/checkout@v4
+      with:
+        path: dos/Build/LineageOS-20.0/kernel/google/gs201/private
+        submodules: true
+        lfs: true
+  
+    - name: debug
+      run: |
+        ls -la
+        ls -la dos
+        ls -la dos/Build/LineageOS-20.0
