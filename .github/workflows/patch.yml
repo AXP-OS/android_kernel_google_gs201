@@ -33,4 +33,4 @@ jobs:
     - name: Patch
       run: |
         cd dos/Build/LineageOS-20.0
-        source ../../init.sh
+        source ../../Scripts/init.sh
