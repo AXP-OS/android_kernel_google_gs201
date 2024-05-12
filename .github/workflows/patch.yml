@@ -1,0 +1,28 @@
+# https://github.com/marketplace/actions/fork-repo-upstream-sync
+name: "Apply divestOS patches"
+
+on:
+  workflow_dispatch:  # button shown only when in default branch
+
+# Sets permissions of the GITHUB_TOKEN to allow pushing via github token
+permissions:
+  contents: write # allow git push
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    name: "Get divest + AXP patches"
+
+    steps:
+        
+    - name: Checkout 
+      uses: actions/checkout@v4
+      with:
+        repository: AXP-OS/build
+        ref: "${{ github.event.repository.name }}"
+        # REQUIRED if your upstream repo is private (see wiki)
+        persist-credentials: false
+        #token: ${{ secrets.GITHUB_TOKEN }}
+        submodules: true
+
+    
