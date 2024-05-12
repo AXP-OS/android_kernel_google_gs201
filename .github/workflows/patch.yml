@@ -33,4 +33,7 @@ jobs:
     - name: Patch
       run: |
         cd dos/Build/LineageOS-20.0
+        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+        chmod a+x ~/bin/repo
+        ~/bin/repo init -u https://github.com/LineageOS/android.git -b lineage-20.0
         source ../../Scripts/init.sh
