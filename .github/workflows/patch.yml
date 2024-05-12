@@ -30,8 +30,7 @@ jobs:
         submodules: true
         lfs: true
   
-    - name: debug
+    - name: Patch
       run: |
-        ls -la
-        ls -la dos
-        ls -la dos/Build/LineageOS-20.0
+        cd dos/Build/LineageOS-20.0
+        source ../../init.sh
