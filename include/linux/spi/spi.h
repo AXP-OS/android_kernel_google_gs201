@@ -517,6 +517,9 @@ struct spi_controller {
 
 #define SPI_MASTER_GPIO_SS		BIT(5)	/* GPIO CS must select slave */
 
+	/* flag indicating this is a non-devres managed controller */
+	bool			devm_allocated;
+
 	/* flag indicating this is an SPI slave controller */
 	bool			slave;
 
@@ -529,6 +532,9 @@ struct spi_controller {
 
 	/* I/O mutex */
 	struct mutex		io_mutex;
+
+	/* Used to avoid adding the same CS twice */
+	struct mutex		add_lock;
 
 	/* lock and mutex for SPI bus locking */
 	spinlock_t		bus_lock_spinlock;
